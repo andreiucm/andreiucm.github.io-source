@@ -1,0 +1,15 @@
+{
+  "name": "andreiucm-source",
+  "version": "1.0.0",
+  "description": "Angular cli environment for angular app workspace",
+  "scripts": {
+    "ng": "ng"
+  },
+  "keywords": [
+  ],
+  "author": "Andrei Margine",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/cli": "^17.0.10"
+  }
+}
