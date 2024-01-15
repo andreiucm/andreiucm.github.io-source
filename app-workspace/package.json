@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run publish-locally",
+    "publish-locally": "deno run --allow-read --allow-write ../../deno-utils/move-angular-files.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
