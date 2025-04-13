@@ -5,11 +5,10 @@
   "scripts": {
     "ng": "ng"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Andrei Margine",
   "license": "ISC",
   "dependencies": {
-    "@angular/cli": "^17.0.10"
+    "@angular/cli": "^19.2.7"
   }
 }
