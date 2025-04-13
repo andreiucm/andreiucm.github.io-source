@@ -3,15 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  template: `
+    selector: 'app-root',
+    imports: [CommonModule, RouterOutlet],
+    template: `
     <h1>Welcome to {{title}}!</h1>
 
     <router-outlet></router-outlet>
   `,
-  styles: [],
+    styles: []
 })
 export class AppComponent {
   title = 'andreiucm.github.io';
