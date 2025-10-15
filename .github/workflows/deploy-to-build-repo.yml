@@ -1,0 +1,54 @@
+name: Build and Deploy to Build Repo
+
+on:
+  push:
+    branches: [ main ]  # Change to 'master' if that's your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source repo
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}  # Default token for source repo
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # Use your Angular's Node version (e.g., 18 or 20)
+        cache: 'npm'
+        cache-dependency-path: 'app-workspace/package-lock.json'  # Caches from the nested folder
+
+    - name: Install dependencies
+      run: cd app-workspace && npm ci  # Or 'npm install' if you prefer
+
+    - name: Build Angular app
+      run: cd app-workspace && npm run build -- --configuration production  # Adjust to your build script (e.g., 'ng build --prod')
+
+    - name: Checkout build repo
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ secrets.BUILD_REPO_NAME }}  # e.g., 'yourusername/build-repo'
+        token: ${{ secrets.BUILD_REPO_PAT }}
+        path: build-repo  # Clones into a 'build-repo' subfolder (temp workspace only)
+
+    - name: Copy built files to build repo root
+      run: |
+        # Remove old build files (optional, to avoid bloat)
+        rm -rf build-repo/*
+        # Copy new dist/browser/ contents to the root of the cloned build repo
+        cp -r app-workspace/dist/browser/* build-repo/  # Copies everything from dist/browser/
+
+    - name: Commit and push to build repo
+      run: |
+        cd build-repo
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        # Only commit if there are changes
+        git diff --staged --quiet || git commit -m "Automated deploy from source: ${{ github.sha }}"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.BUILD_REPO_PAT }}
