@@ -9,6 +9,6 @@
   "author": "Andrei Margine",
   "license": "ISC",
   "dependencies": {
-    "@angular/cli": "^19.2.7"
+    "@angular/cli": "^20.3.6"
   }
 }
