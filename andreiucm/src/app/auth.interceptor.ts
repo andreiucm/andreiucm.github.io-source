@@ -10,7 +10,7 @@ export const authInterceptorFn: HttpInterceptorFn = (req, next) => {
 
     // Ignore adding Authorization (and don't block) for auth/public routes
     const url = req.url || '';
-    const ignoreRegex = /\/(login|signin|home)(\/|$)/i;
+    const ignoreRegex = /\/(login|signup|home)(\/|$)/i;
     if (ignoreRegex.test(url)) {
         // Continue without modifying the request
         return next(req);
