@@ -10,12 +10,12 @@ jobs:
 
     steps:
     - name: Checkout source repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}  # Default token for source repo
 
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '24'
         cache: 'npm'
@@ -28,7 +28,7 @@ jobs:
       run: cd andreiucm && npm run build -- --configuration production  # Adjust to your build script (e.g., 'ng build --prod')
 
     - name: Checkout build repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: ${{ secrets.BUILD_REPO_NAME }}  # e.g., 'yourusername/build-repo'
         token: ${{ secrets.BUILD_REPO_PAT }}
