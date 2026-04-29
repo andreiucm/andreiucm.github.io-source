@@ -1,48 +1,46 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { UserService } from "./user.service";
 import { AuthService } from "./auth.service";
+import { ZardButtonComponent } from '@/shared/components/button';
+import { ZardCardComponent } from '@/shared/components/card';
+import { ZardInputDirective } from '@/shared/components/input';
 
 @Component({
   selector: 'login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ZardButtonComponent, ZardCardComponent, ZardInputDirective],
   template: `
-    <div class="login-container">
+    <z-card class="login-container" zTitle="Login" zDescription="Access your dashboard">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <h2>Login</h2>
         <div class="form-group">
           <label for="email">Email</label>
-          <input id="email" type="email" formControlName="email" required />
-          <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-            Valid email is required
-          </div>
+          <input z-input id="email" type="email" formControlName="email" required />
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+            <div class="error">
+              Valid email is required
+            </div>
+          }
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input id="password" type="password" formControlName="password" required />
-          <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-            Password is required
-          </div>
+          <input z-input id="password" type="password" formControlName="password" required />
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <div class="error">
+              Password is required
+            </div>
+          }
         </div>
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        <button z-button zFull type="submit" [zDisabled]="loginForm.invalid">Login</button>
       </form>
-    </div>
-  `,
+    </z-card>
+    `,
   styles: `
     .login-container {
       max-width: 350px;
       margin: 5rem auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
     }
     .form-group {
       margin-bottom: 1.5rem;
@@ -53,32 +51,10 @@ import { AuthService } from "./auth.service";
       margin-bottom: 0.5rem;
       font-weight: 500;
     }
-    input {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
     .error {
       color: #d32f2f;
       font-size: 0.85rem;
       margin-top: 0.25rem;
-    }
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background: #1976d2;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:disabled {
-      background: #b0b0b0;
-      cursor: not-allowed;
     }
   `
 })

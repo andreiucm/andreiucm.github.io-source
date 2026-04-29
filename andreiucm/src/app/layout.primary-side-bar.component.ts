@@ -14,22 +14,24 @@ import { RouterLink } from '@angular/router';
 	styles: `
     :host {
         display: block;
-        background-color: white;
+        background-color: var(--sidebar);
         padding: 1.5rem;
-        border-right: 1px solid #e0e0e0;
+        border-right: 1px solid var(--sidebar-border);
         height: 100vh;
+        color: var(--sidebar-foreground);
     }
 
     .nav-item {
         display: block;
         padding: 0.75rem 1rem;
-        color: #333;
+        color: inherit;
         text-decoration: none;
         border-radius: 0.5rem;
     }
 
     .nav-item:hover {
-        background-color: #f5f5f5;
+        background-color: var(--sidebar-accent);
+        color: var(--sidebar-accent-foreground);
     }
     `,
 })

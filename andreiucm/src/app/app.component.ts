@@ -27,7 +27,8 @@ import { PrimarySideBarComponent } from './layout.primary-side-bar.component';
       display: grid;
       grid-template-columns: 280px 1fr;
       height: 100vh;
-      background-color: #f8f9fa;
+      background-color: var(--background);
+      color: var(--foreground);
     }
 
     .main-container {

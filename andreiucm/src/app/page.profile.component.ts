@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ActivatedRoute } from '@angular/router';
 import { User } from './user.service';
+import { ZardCardComponent } from '@/shared/components/card';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [ZardCardComponent],
   template: `
     @if (profile) {
-        <div class="profile-container">
+        <z-card class="profile-container" zTitle="Profile">
             <h2>{{ profile.name }}</h2>
             <p>{{ profile.email }}</p>
-        </div>
+        </z-card>
     } @else {
         <p>Loading profile...</p>
     }
@@ -21,10 +22,6 @@ import { User } from './user.service';
     .profile-container {
         max-width: 600px;
         margin: 2rem auto;
-        background: #fff;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         text-align: center;
     }
     `

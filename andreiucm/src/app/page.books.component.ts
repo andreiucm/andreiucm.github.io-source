@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { HttpClient, httpResource } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ZardButtonComponent } from '@/shared/components/button';
+import { ZardCardComponent } from '@/shared/components/card';
+import { ZardInputDirective } from '@/shared/components/input';
 
 export interface Book {
 	id: number;
@@ -12,19 +15,18 @@ export interface Book {
 
 @Component({
   selector: 'app-books',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ZardButtonComponent, ZardCardComponent, ZardInputDirective],
   styles: `
+    :host {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
     .form-container {
       max-width: 350px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-    }
-    h3 {
-      text-align: center;
-      margin-bottom: 2rem;
+      width: 100%;
+      margin: 0 auto;
     }
     .form-group {
       margin-bottom: 1.5rem;
@@ -35,73 +37,54 @@ export interface Book {
       margin-bottom: 0.5rem;
       font-weight: 500;
     }
-    input {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background: #1976d2;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:disabled {
-      background: #b0b0b0;
-      cursor: not-allowed;
+    .book-list {
+      margin: 0;
+      padding-left: 1.25rem;
     }
   `,
   template: `
-    <h2>Books List</h2>
+    <z-card zTitle="Books List" zDescription="Browse the saved books">
+      @if(booksResource.isLoading()) {
+        <p>Loading books...</p>
+      } @else if(booksResource.error()){
+        <p>Failed to load books.</p>
+      } @else {
+        <ul class="book-list">
+          @for (book of booksResource.value(); track book.id) {
+            <li>
+              <strong>{{ book.title }}</strong> by {{ book.author }} ({{ book.published_year }})
+            </li>
+          }
+        </ul>
+      }
+    </z-card>
 
-    @if(booksResource.isLoading()) {
-      <p>Loading books...</p>
-    } @else if(booksResource.error()){
-      <p>Failed to load books.</p>
-    } @else {
-      <ul>
-        @for (book of booksResource.value(); track $index) {
-          <li>
-            <strong>{{ book.title }}</strong> by {{ book.author }} ({{ book.published_year }})
-          </li>
-        }
-      </ul>
-    }
-
-    <div class="form-container">
-      <h3>Add a new book</h3>
+    <z-card class="form-container" zTitle="Add a new book">
       <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="title">Title</label>
-          <input id="title" type="text" placeholder="Enter book title" formControlName="title" />
+          <input z-input id="title" type="text" placeholder="Enter book title" formControlName="title" />
           @if (bookForm.get('title')?.invalid && bookForm.get('title')?.touched) {
             <div class="error">Title is required</div>
           }
         </div>
         <div class="form-group">
           <label for="author">Author</label>
-          <input id="author" type="text" placeholder="Enter author name" formControlName="author" />
+          <input z-input id="author" type="text" placeholder="Enter author name" formControlName="author" />
           @if (bookForm.get('author')?.invalid && bookForm.get('author')?.touched) {
             <div class="error">Author is required</div>
           }
         </div>
         <div class="form-group">
           <label for="year">Year</label>
-          <input id="year" type="number" placeholder="Publication year" formControlName="year" />
+          <input z-input id="year" type="number" placeholder="Publication year" formControlName="year" />
           @if (bookForm.get('year')?.invalid && bookForm.get('year')?.touched) {
             <div class="error">Year is required</div>
           }
         </div>
-        <button type="submit" [disabled]="bookForm.invalid">Add Book</button>
+        <button z-button zFull type="submit" [zDisabled]="bookForm.invalid">Add Book</button>
       </form>
-    </div>
+    </z-card>
   `,
 })
 export class BooksComponent {
