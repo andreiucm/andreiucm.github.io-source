@@ -1,45 +1,37 @@
 import { Routes } from '@angular/router';
-import { homeGuard } from './home.guard';
 import { authGuard } from './auth.guard';
 import { profileResolver } from "./profile.resolver";
 
 export const routes: Routes = [
 	{
 		path: "",
-		redirectTo: "/home",
-		pathMatch: "full",
+		loadComponent: () =>
+			import("./page.landing.component").then((m) => m.LandingPage),
+		title: "Andrei Margine — Frontend Software Developer",
 	},
 	{
-		path: "home",
+		path: "private",
 		loadComponent: () =>
-			import("./page.home.component").then((m) => m.HomeComponent),
-		canActivate: [homeGuard],
-	},
-	{
-		path: "profile",
-		loadComponent: () =>
-			import("./page.profile.component").then((m) => m.ProfileComponent),
-		resolve: {
-			profile: profileResolver,
-		},
+			import("./private-layout.component").then((m) => m.PrivateLayout),
 		canActivate: [authGuard],
+		children: [
+			{ path: "", redirectTo: "profile", pathMatch: "full" },
+			{
+				path: "profile",
+				loadComponent: () => import("./page.profile.component").then((m) => m.ProfileComponent),
+				resolve: { profile: profileResolver },
+			},
+			{
+				path: "books",
+				loadComponent: () => import("./page.books.component").then((m) => m.BooksComponent),
+			},
+		],
 	},
-	{
-		path: "login",
-		loadComponent: () =>
-			import("./page.login.component").then((m) => m.LoginComponent),
-	},
-	{
-		path: "signup",
-		loadComponent: () =>
-			import("./page.signup.component").then((m) => m.SignupComponent),
-	},
-	{
-		path: "books",
-		loadComponent: () =>
-			import("./page.books.component").then((m) => m.BooksComponent),
-		canActivate: [authGuard],
-	},
+	{ path: "home", redirectTo: "/", pathMatch: "full" },
+	{ path: "profile", redirectTo: "/private/profile", pathMatch: "full" },
+	{ path: "books", redirectTo: "/private/books", pathMatch: "full" },
+	{ path: "login", redirectTo: "/", pathMatch: "full" },
+	{ path: "signup", redirectTo: "/", pathMatch: "full" },
 	{
 		path: "**",
 		loadComponent: () =>
