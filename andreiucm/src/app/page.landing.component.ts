@@ -2,18 +2,19 @@ import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { PortfolioAssistant } from './portfolio-assistant.component';
 import { UserService } from './user.service';
 
 type AuthMode = 'login' | 'signup';
 
 @Component({
   selector: 'landing-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PortfolioAssistant],
   template: `
     <main id="top">
       <nav class="nav" aria-label="Main navigation">
         <a class="monogram" href="#top" aria-label="Andrei Margine, home">AM<span>.</span></a>
-        <div class="nav-links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
+        <div class="nav-links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#assistant">Ask AI</a><a href="#contact">Contact</a></div>
         <button class="nav-cta" type="button" (click)="openAuth('login')">Login / Sign up</button>
       </nav>
 
@@ -48,8 +49,10 @@ type AuthMode = 'login' | 'signup';
         </div>
       </section>
 
+      <portfolio-assistant />
+
       <section class="access" id="access">
-        <p class="section-label">04 / Private space</p>
+        <p class="section-label">05 / Private space</p>
         <div class="access-content"><div><h2>Continue to the<br />private workspace.</h2><p>Returning user or joining for the first time? Choose your path to continue.</p></div><div class="access-actions"><button class="primary-button" type="button" (click)="openAuth('login')">Log in <span>→</span></button><button class="secondary-button" type="button" (click)="openAuth('signup')">Create an account <span>→</span></button></div></div>
       </section>
 
