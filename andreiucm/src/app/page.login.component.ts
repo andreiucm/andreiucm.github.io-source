@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -37,6 +37,7 @@ import { ZardInputDirective } from '@/shared/components/input';
       </form>
     </z-card>
     `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     .login-container {
       max-width: 350px;

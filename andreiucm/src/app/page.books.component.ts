@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { HttpClient, httpResource } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -42,6 +42,7 @@ export interface Book {
       padding-left: 1.25rem;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <z-card zTitle="Books List" zDescription="Browse the saved books">
       @if(booksResource.isLoading()) {

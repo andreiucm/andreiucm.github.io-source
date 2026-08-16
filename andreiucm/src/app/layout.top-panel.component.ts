@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideLanguages, lucideUserCircle } from '@ng-icons/lucide';
@@ -106,6 +106,7 @@ import { ZardSwitchComponent } from '@/shared/components/switch';
         </ng-template>
     </div>
     `,
+	changeDetection: ChangeDetectionStrategy.Eager,
 	styles: `
     :host {
         display: flex;

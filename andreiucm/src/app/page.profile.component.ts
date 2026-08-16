@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { User } from './user.service';
@@ -18,6 +18,7 @@ import { ZardCardComponent } from '@/shared/components/card';
         <p>Loading profile...</p>
     }
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: `
     .profile-container {
         max-width: 600px;

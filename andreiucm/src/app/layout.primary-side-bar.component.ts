@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LogoComponent } from "./logo.component";
 import { RouterLink } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
         <a routerLink="/books" class="nav-item">Books</a>
     </nav>
     `,
+	changeDetection: ChangeDetectionStrategy.Eager,
 	styles: `
     :host {
         display: block;

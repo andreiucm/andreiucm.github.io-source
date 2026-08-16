@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import {
 	FormBuilder,
 	FormGroup,
@@ -44,6 +44,7 @@ import { ZardInputDirective } from '@/shared/components/input';
         </form>
     </z-card>
     `,
+	changeDetection: ChangeDetectionStrategy.Eager,
 	styles: `
     .signup-container {
         max-width: 350px;

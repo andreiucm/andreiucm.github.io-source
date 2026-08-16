@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 import { User, UserService } from './user.service'; // Import the USERService
@@ -29,6 +29,7 @@ import { ZardCardComponent } from '@/shared/components/card';
       }
     </z-card>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     .home-container {
       max-width: 600px;

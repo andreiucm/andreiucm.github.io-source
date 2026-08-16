@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ZardButtonComponent } from '@/shared/components/button';
 import { ZardCardComponent } from '@/shared/components/card';
@@ -14,6 +14,7 @@ import { ZardCardComponent } from '@/shared/components/card';
         <a z-button routerLink="/">Go to Home</a>
     </z-card>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: `
     .not-found-container {
         max-width: 600px;

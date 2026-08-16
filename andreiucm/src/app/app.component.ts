@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TopPanelComponent } from './layout.top-panel.component';
 import { PrimarySideBarComponent } from './layout.primary-side-bar.component';
@@ -17,6 +17,7 @@ import { PrimarySideBarComponent } from './layout.primary-side-bar.component';
       </div>
     </div>
   `,
+	changeDetection: ChangeDetectionStrategy.Eager,
 	styles: `
     :host {
       display: block;

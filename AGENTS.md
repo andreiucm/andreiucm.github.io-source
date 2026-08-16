@@ -8,7 +8,7 @@
 
 ## Angular version and modernization
 
-- Treat `andreiucm/package.json` and its lockfile as the source of truth for the installed Angular version. The project is currently on Angular 21, but it is intended to be upgraded regularly.
+- Treat `andreiucm/package.json` and its lockfile as the source of truth for the installed Angular version. The project is currently on Angular 22, but it is intended to be upgraded regularly.
 - Follow the latest stable Angular patterns supported by the installed version. Consult the project-local Angular skills, Angular CLI MCP guidance when available, and current official Angular documentation before making framework-level decisions.
 - Do not introduce APIs from a newer Angular version until the project dependencies have been upgraded to support them.
 - Prefer stable modern APIs over deprecated or legacy alternatives. For new forms, prefer Signal Forms once the installed Angular version supports their stable API (Angular 22+). Migrate existing Reactive Forms deliberately rather than as an unrelated rewrite.

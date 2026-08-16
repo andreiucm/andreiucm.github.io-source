@@ -4,12 +4,12 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideZard } from '@/shared/core';
-import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { provideHttpClient, withInterceptors, withXhr } from "@angular/common/http";
 import { authInterceptorFn } from "./auth.interceptor";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
-		provideHttpClient(withInterceptors([authInterceptorFn])),
+		provideHttpClient(withXhr(), withInterceptors([authInterceptorFn])),
 		provideZard(),
 		provideBrowserGlobalErrorListeners(),
 		provideZonelessChangeDetection(),
