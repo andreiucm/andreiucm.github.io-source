@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Andrei Margine</title>
+  <rect width="512" height="512" fill="#11120f" />
+  <text
+    x="246"
+    y="330"
+    fill="#f2efe7"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="230"
+    font-weight="800"
+    letter-spacing="-18"
+    text-anchor="middle"
+  >AM</text>
+  <circle cx="416" cy="309" r="19" fill="#d9ff43" />
+</svg>
