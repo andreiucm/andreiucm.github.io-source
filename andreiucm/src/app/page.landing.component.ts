@@ -2,6 +2,7 @@ import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { InterviewScheduler } from './interview-scheduler.component';
 import { PortfolioAssistant } from './portfolio-assistant.component';
 import { UserService } from './user.service';
 
@@ -9,13 +10,13 @@ type AuthMode = 'login' | 'signup';
 
 @Component({
   selector: 'landing-page',
-  imports: [ReactiveFormsModule, PortfolioAssistant],
+  imports: [ReactiveFormsModule, PortfolioAssistant, InterviewScheduler],
   template: `
     <main id="top">
       <nav class="nav" aria-label="Main navigation">
         <a class="monogram" href="#top" aria-label="Andrei Margine, home">AM<span>.</span></a>
         <div class="nav-links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#assistant">Ask AI</a><a href="#contact">Contact</a></div>
-        <button class="nav-cta" type="button" (click)="openAuth('login')">Login / Sign up</button>
+        <interview-scheduler />
       </nav>
 
       <section class="hero">
@@ -95,7 +96,6 @@ type AuthMode = 'login' | 'signup';
     .nav { height:92px; display:flex; align-items:center; justify-content:space-between; padding:0 4.5vw; border-bottom:1px solid var(--line); }
     .monogram { font-size:1.4rem; font-weight:800; letter-spacing:-.08em; }.monogram span,h1 em,h2 em{color:var(--lime)}
     .nav-links{display:flex;gap:2.2rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.13em}
-    .nav-cta{color:var(--paper);background:transparent;border:1px solid var(--paper);border-radius:999px;padding:.75rem 1.2rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.11em;cursor:pointer}.nav-cta:hover{background:var(--lime);color:var(--ink)}
     .hero{min-height:calc(100vh - 92px);padding:8vh 4.5vw 3.5vh;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.hero::after{content:"";position:absolute;width:32vw;height:32vw;border:1px solid rgba(217,255,67,.25);border-radius:50%;right:-14vw;top:7vh}.eyebrow,.section-label{color:var(--muted);font:500 .7rem/1.2 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.16em}.eyebrow{display:flex;align-items:center;gap:.7rem}.eyebrow span{width:7px;height:7px;border-radius:50%;background:var(--lime)}
     .hero h1{margin:5vh 0 3vh;max-width:1100px;font-size:clamp(4rem,9.8vw,9rem);line-height:.88;letter-spacing:-.07em;font-weight:600}h1 em,h2 em{font-family:Georgia,serif;font-weight:400}.hero-bottom{display:flex;align-items:end;justify-content:space-between;gap:2rem}.hero-bottom p{margin:0;max-width:590px;color:#c2c3ba;font-size:clamp(1.1rem,1.8vw,1.55rem);line-height:1.45}.round-link{width:62px;height:62px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:1.6rem}.hero-meta{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:1.1rem;margin-top:5vh;color:var(--muted);font:.65rem ui-monospace,monospace;text-transform:uppercase;letter-spacing:.12em}
     .statement{background:var(--paper);color:var(--ink);padding:9vw 4.5vw 7vw}.statement .section-label,.work .section-label{color:#6e7068}.statement-text{margin:3rem 0 6rem;max-width:1120px;font-size:clamp(2.3rem,5vw,5.2rem);line-height:1.02;letter-spacing:-.055em}.statement-text strong{font-family:Georgia,serif;font-weight:400;font-style:italic}.skill-rail{border-block:1px solid #b9b7af;padding:1.4rem 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font:.72rem ui-monospace,monospace;text-transform:uppercase;letter-spacing:.1em}
