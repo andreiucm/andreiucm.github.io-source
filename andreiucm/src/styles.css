@@ -38,6 +38,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --workspace-highlight: oklch(0.91 0.2 115);
+  --workspace-highlight-foreground: oklch(0.24 0.04 115);
 }
 
 .dark {
@@ -66,12 +68,14 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.922 0 0);
+  --sidebar-primary-foreground: oklch(0.205 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --workspace-highlight: oklch(0.86 0.2 115);
+  --workspace-highlight-foreground: oklch(0.2 0.04 115);
 }
 
 
@@ -112,6 +116,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-workspace-highlight: var(--workspace-highlight);
+  --color-workspace-highlight-foreground: var(--workspace-highlight-foreground);
 }
 
 
@@ -132,6 +138,52 @@
   input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield; /* Added for general compatibility */
+  }
+}
+
+@layer components {
+  .private-workspace-canvas {
+    background-color: var(--background);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in oklab, var(--foreground) 10%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+
+  .workspace-kicker {
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .workspace-hero-card::after {
+    position: absolute;
+    right: -5rem;
+    bottom: -7rem;
+    width: 16rem;
+    height: 16rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--workspace-highlight) 24%, transparent);
+    content: '';
+    pointer-events: none;
+  }
+
+  .workspace-avatar {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 2px solid var(--card);
+    border-radius: 999px;
+    background: var(--workspace-highlight);
+    color: var(--workspace-highlight-foreground);
+    font-size: 0.7rem;
+    font-weight: 600;
   }
 }
 

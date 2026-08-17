@@ -7,21 +7,17 @@ import { TopPanelComponent } from './layout.top-panel.component';
   selector: 'private-layout',
   imports: [RouterOutlet, TopPanelComponent, PrimarySideBarComponent],
   template: `
-    <div class="layout">
+    <div class="grid min-h-dvh grid-cols-[15.5rem_minmax(0,1fr)] bg-background text-foreground max-md:grid-cols-1">
       <primary-side-bar />
-      <div class="main-container">
+      <div class="min-w-0">
         <top-panel />
-        <main class="main-content"><router-outlet /></main>
+        <main class="private-workspace-canvas min-h-[calc(100dvh-4.25rem)] px-6 py-7 max-sm:px-4 max-sm:py-5">
+          <router-outlet />
+        </main>
       </div>
     </div>
   `,
-  styles: `
-    :host { display: block; height: 100vh; }
-    .layout { display: grid; grid-template-columns: 280px 1fr; height: 100vh; background: var(--background); color: var(--foreground); }
-    .main-container { display: grid; grid-template-rows: auto 1fr; min-height: 0; }
-    .main-content { padding: 2rem; overflow-y: auto; min-height: 0; }
-    @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } primary-side-bar { display: none; } }
-  `,
+  styles: `:host { display: block; min-height: 100dvh; }`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrivateLayout {}

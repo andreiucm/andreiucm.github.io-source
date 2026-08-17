@@ -148,7 +148,7 @@ export class LandingPage {
     if (this.loginForm.invalid) return this.loginForm.markAllAsTouched();
     this.submitting.set(true); this.authError.set('');
     this.userService.logIn(this.loginForm.getRawValue()).subscribe({
-      next: ({ token }) => { this.authService.setToken(token); void this.router.navigate(['/private/profile']); },
+      next: ({ token }) => { this.authService.setToken(token); void this.router.navigate(['/private/home']); },
       error: () => { this.authError.set('We could not log you in. Check your details and try again.'); this.submitting.set(false); },
     });
   }
